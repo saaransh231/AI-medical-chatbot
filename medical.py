@@ -40,7 +40,7 @@ if st.session_state.step == 1:
         room = st.radio("Room Type Preference", ["AC", "Non AC", "Less Queue"], horizontal=True)
         budget = st.selectbox("Budget Range (₹)", ["1000-2000", "2000-3000", "3000-4000"])
 
-        hospital = st.selectbox("Select Hospital", ["Apollo", "Fortis", "Max Hospital"])
+        hospital = st.selectbox("Select Preferred Hospital", ["Apollo", "Fortis", "Max Hospital"])
         
         doctors = {
             "Apollo": ["Dr. Sharma (Cardiology)", "Dr. Sneha (General)"],
@@ -48,7 +48,7 @@ if st.session_state.step == 1:
             "Max Hospital": ["Dr. Raj (Pediatrics)", "Dr. Neha (Dermatology)"]
         }
 
-        doctor = st.selectbox("Select Doctor", doctors[hospital])
+        doctor = st.selectbox("Select Preferred Doctor", doctors[hospital])
         
         submitted = st.form_submit_button("Continue to Medical Chat")
 
@@ -108,7 +108,7 @@ elif st.session_state.step == 2:
     elif st.session_state.count >= 3:
         placeholder_text = "add more details / get consultancy"
     else:
-        placeholder_text = "Type your response..."
+        placeholder_text = "Say booking"
 
     prompt = st.chat_input(placeholder_text)
 
@@ -130,9 +130,9 @@ elif st.session_state.step == 2:
         st.rerun()
 
     # Show booking button after 3-4 interactions
-    if st.session_state.count >= 3:
+    if st.session_state.count >= 4:
         st.divider()
-        st.info("You have shared enough details. You can now finalize your appointment.")
+        st.info("You can now finalize your appointment / Add more details")
         if st.button("Proceed to Book Appointment", type="primary"):
             st.session_state.step = 3
             st.rerun()
